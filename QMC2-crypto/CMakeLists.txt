@@ -37,6 +37,10 @@ set(QMC_CRYPTO_SOURCES
 # Add source to this project's executable.
 add_library (QMC2-crypto STATIC ${QMC_CRYPTO_SOURCES})
 
+if(WIN32)
+	target_link_libraries(QMC2-crypto ws2_32)
+endif()
+
 if (!MSVC)
 	target_link_libraries(QMC2-crypto m)
 endif()

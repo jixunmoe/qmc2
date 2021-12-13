@@ -10,8 +10,6 @@
 #include <arpa/inet.h>
 #include <endian.h>
 #else
-#pragma comment(lib, "ws2_32.lib")
-
 #define NOMINMAX
 #include <winsock.h>
 #undef NOMINMAX
