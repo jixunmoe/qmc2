@@ -18,7 +18,8 @@ jobs:
       - name: 🔧 Produce WASM build
         run: |
           bash QMC2-wasm/build-wasm
-          ls -al . build QMC2-wasm/build/QMC2-wasm
+          set -x
+          ls -al . public QMC2-wasm/build/wasm/QMC2-wasm
 
       - name: 🚀 Deploy
         if: github.ref == 'refs/heads/main'
