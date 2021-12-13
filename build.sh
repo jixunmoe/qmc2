@@ -2,8 +2,6 @@
 
 set -e
 
-BUILD_VERSION=0.0.4
-
 pushd "$(realpath "$(dirname "$0")")"
 
 REPO_ROOT="$PWD"
@@ -34,7 +32,12 @@ build_win() {
     -DCMAKE_TOOLCHAIN_FILE="${REPO_ROOT}/cmake/mingw-${ARCH_NAME}-linux.cmake"
   make
   cp "QMC2-decoder/QMC2-decoder.exe" \
-    "../bin/QMC2-decoder.$BUILD_VERSION.${ARCH_NAME}.exe"
+    "../bin/QMC2-decoder.${ARCH_NAME}.exe"
+  (
+    cd ../bin
+    zip -9 "QMC2-decoder.win.${ARCH_NAME}.zip" \
+      "QMC2-decoder.${ARCH_NAME}.exe"
+  )
   popd # build/win_???
 }
 
@@ -44,7 +47,12 @@ build_linux_x64() {
   cmake ../.. -DCMAKE_BUILD_TYPE=Release
   make
   cp "QMC2-decoder/QMC2-decoder" \
-    "../bin/QMC2-decoder.$BUILD_VERSION.x86_64"
+    "../bin/QMC2-decoder.linux.x86_64"
+  (
+    cd ../bin
+    tar zcvf "QMC2-decoder.linux.x86_64.tar.gz" \
+      "QMC2-decoder.linux.x86_64"
+  )
   popd # build/linux_x86_64
 }
 
