@@ -19,7 +19,7 @@ jobs:
             {gcc,g++}-mingw-w64-i686 \
             {gcc,g++}-mingw-w64-x86-64
 
-      - name: 🔧 Produce WASM build
+      - name: 🔧 Build Binary
         run: |
           bash build.sh \
             win_i686    \
@@ -32,7 +32,7 @@ jobs:
           name: binaries
           path: build/bin
 
-      - name: 📝 Upload assets...
+      - name: 📝 Draft Release
         if: startsWith(github.ref, 'refs/tags/v')
         uses: actions/upload-release-asset@v1.0.1
         env:
